@@ -1,0 +1,5 @@
+# depslib dependency file v1.0
+1720644330 source:c:\users\pedro\onedrive\documents\cs50\c\dinheiro\main.c
+	<stdio.h>
+	<stdlib.h>
+
