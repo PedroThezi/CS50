@@ -8,7 +8,7 @@ int coleman_liau (int words, int letters, int sentences);
 
 int main(void)
 {
-    int words = 1, letters = 0, setences = 0;
+    int words = 1, letters = 0, sentences = 0;
     char text[MAX];
 
     printf("text: ");
@@ -27,11 +27,11 @@ int main(void)
         }
         if(text[i] == '!' || text[i] == '?' || text[i] == '.')
         {
-            setences++;
+            sentences++;
         }
     }
     
-    int index = coleman_liau(words,letters, setences);
+    int index = coleman_liau(words,letters, sentences);
    
     if(index <= 1)
     printf("\nBefore Grade 1");
