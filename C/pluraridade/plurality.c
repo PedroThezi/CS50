@@ -51,17 +51,18 @@ int main(int argc, char *argv[])
 
     // Loop over all voters
     for (int i = 0; i < voter_count; i++)
-    {
-        char *name;
-        printf("Vote: ");
-        scanf("%s",&name);
+{
+    char name[20]; 
+    printf("Vote: ");
+    scanf("%s", name);
 
-        // Check for invalid vote
-        if (!vote(name))
-        {
-            printf("Invalid vote.\n");
-        }
+    bool valid_vote = vote(name); 
+    if (!valid_vote)
+    {
+        printf("Invalid vote.\n");
     }
+}
+
 
     // Display winner of election
     print_winner();
@@ -70,14 +71,39 @@ int main(int argc, char *argv[])
 // Update vote totals given a new vote
 bool vote(char *name)
 {
-    
+    for (int i = 0; i < candidate_count; i++)
+    {
+        int compare = strcmp(name, candidates[i].name);
+        if (compare == 0)
+        {
+            candidates[i].votes++;
+            return true;
+        }
+    }
     return false;
 }
+
 
 // Print the winner (or winners) of the election
 void print_winner(void)
 {
-    // TODO
+    int most_voted = 0;
+    for (int i = 0; i < candidate_count; i++)
+    {
+        if(candidates[i].votes >= most_voted)
+        {
+            most_voted = candidates[i].votes;
+        }
+    }
+    for (int i = 0; i < candidate_count; i++)
+    {
+        if (candidates[i].votes == most_voted)
+        {
+            printf("The winner is %s\n", candidates[i].name);
+        }
+        
+    }
+    
     return;
 }
 
