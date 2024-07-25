@@ -20,14 +20,14 @@ int main(int argc, char *argv[])
     FILE *input = fopen(argv[1], "r");
     if (input == NULL)
     {
-        printf("Could not open file.\n");
+        printf("Could not open input file.\n");
         return 1;
     }
 
     FILE *output = fopen(argv[2], "w");
     if (output == NULL)
     {
-        printf("Could not open file.\n");
+        printf("Could not open output file.\n");
         return 1;
     }
 
@@ -35,16 +35,15 @@ int main(int argc, char *argv[])
 
     // TODO: Copy header from input file to output file
     uint8_t header[HEADER_SIZE];
-    int16_t buffer;
 
     fread(header, sizeof(uint8_t),HEADER_SIZE, input);
     fwrite(header, sizeof(uint8_t), HEADER_SIZE, output);
 
     // TODO: Read samples from input file and write updated data to output file
-    while(input != NULL)
+    int16_t buffer;
+    while((fread(&buffer, sizeof(int16_t), 1, input)) >0)
     {
-        fread(&buffer,sizeof(int16_t),1,input);
-        buffer = buffer * factor;
+        buffer = (int16_t)(buffer * factor);
         fwrite(&buffer,sizeof(int16_t),1,output);
     }
     // Close files
